@@ -4,8 +4,25 @@ import java.util.*
 
 
 fun main(args: Array<String>) {
-//    val httpUtil = HttpUtil()
-//    httpUtil.sendRequest("www.baidu.com", "Get", { println(it) }, { println(it) })
+    val httpUtil = HttpUtil()
+    httpUtil.sendRequest("http:www.baidu.com", "GET",
+            onsuccess = {
+                println("成功了")
+            },
+            onError = {
+                println("失败了")
+
+            })
+//    http {
+//        path = "http://www.baidu.com"
+//        method = "GET"
+//        onsuccess{
+//            println("成功了")
+//        }
+//        onError {
+//            println("失败了")
+//        }
+//    }
 }
 
 
@@ -14,13 +31,13 @@ fun main(args: Array<String>) {
 //需要通过构建器模式实现
 
 //构建器
-//class MyRequest(var path: String? = null, var method: String? = null, var onsuccess: ((String) -> Unit)? = null, var onError: ((String) -> Unit)? = null) {
-//    //发送请求方法 调用HttpUtil的sendRequest进行请求
-//    fun send() {
-//        val httpUtil = HttpUtil()
-//        httpUtil.sendRequest(path, method, onsuccess, onError)
-//    }
-//}
+class MyRequest(var path: String? = null, var method: String? = null, var onsuccess: ((String) -> Unit)? = null, var onError: ((String) -> Unit)? = null) {
+    //发送请求方法 调用HttpUtil的sendRequest进行请求
+    fun send() {
+        val httpUtil = HttpUtil()
+        httpUtil.sendRequest(path, method, onsuccess, onError)
+    }
+}
 
 /*fun sendRequest(block: HttpUtil.() -> Unit): HttpUtil {
     return HttpUtil().apply(block)
